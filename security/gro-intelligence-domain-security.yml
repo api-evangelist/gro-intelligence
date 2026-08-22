@@ -1,0 +1,60 @@
+generated: '2026-08-22'
+method: probed
+source: dig + TLS handshake against gro-intelligence.com, 2026-08-22
+note: >-
+  0-working/probe-domain-security.py returned `unreachable` because the only API
+  host in apis.yml (api.gro-intelligence.com) is NXDOMAIN. These values were
+  probed by hand against the registrable domain, which still has DNS. The
+  posture is the posture of an abandoned, registrar-parked domain: a valid but
+  generic DV certificate issued by the parking provider, and no email
+  authentication of any kind.
+hosts:
+- host: api.gro-intelligence.com
+  https: false
+  reachable: false
+  dns: NXDOMAIN
+  note: The published API host. Does not resolve.
+- host: developers.gro-intelligence.com
+  https: false
+  reachable: false
+  dns: NXDOMAIN
+  note: The published developer portal. Does not resolve.
+- host: app.gro-intelligence.com
+  https: false
+  reachable: false
+  dns: NXDOMAIN
+  note: The web application that issued API tokens. Does not resolve.
+- host: gro-intelligence.com
+  https: true
+  reachable: true
+  http_version: '1.1'
+  tls_verify: ok
+  cert_subject: CN=gro-intelligence.com
+  cert_issuer: GoDaddy TLS Intermediate CA DV - R1v1
+  cert_not_before: '2026-07-07'
+  cert_not_after: '2027-01-21'
+  cert_san: [gro-intelligence.com]
+  hsts: false
+  hsts_max_age: null
+  note: >-
+    Registrar parking page. A DV certificate auto-issued by GoDaddy in July
+    2026 — two years after the company ceased operations — which is evidence of
+    parking infrastructure, not of an operating service.
+domains:
+- domain: gro-intelligence.com
+  dnssec: false
+  ds_records: []
+  caa: []
+  spf: false
+  dmarc: false
+  dmarc_policy: null
+  mx: []
+  txt_leftovers:
+  - atlassian-domain-verification (stale verification record from the company's former Atlassian tenant)
+  risk_note: >-
+    No SPF, no DMARC, no CAA and no DNSSEC on a lapsed brand that once served
+    financial-grade agricultural intelligence to traders, insurers and lenders.
+    With no MX and no email authentication, mail claiming to be from
+    @gro-intelligence.com cannot be distinguished from a forgery by a receiving
+    domain. Recorded as an observed fact about an abandoned domain, not as a
+    criticism of an operating security program.

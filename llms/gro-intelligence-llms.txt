@@ -1,0 +1,61 @@
+# Gro Intelligence
+
+> DEFUNCT. Gro Intelligence was an agricultural and climate data company (New York / Nairobi,
+> founded 2014 by Sara Menker) that operated a read-only REST API over a normalized ontology of
+> agricultural, climate and trade time series. The company ceased operations in spring 2024 and its
+> IP was acquired by Almanac (formerly Semios) in November 2024. The API host
+> (api.gro-intelligence.com), the developer portal (developers.gro-intelligence.com) and the web
+> application (app.gro-intelligence.com) all return NXDOMAIN as of 2026-08-22, and the primary
+> domain gro-intelligence.com is a parked registrar lander that answers HTTP 200 to every path.
+> There is no callable endpoint and no way to obtain a credential. This file is a historical record
+> assembled by API Evangelist from the company's still-public GitHub organization and package
+> registry listings — do not attempt to call this API.
+
+## Status
+
+- [Company status: defunct](https://agfundernews.com/breaking-ag-insights-platform-gro-intelligence-is-closing-down): Ceased operations spring 2024 after a 60% layoff in March 2024.
+- [IP acquired by Almanac](https://agfundernews.com/almanac-acquires-gro-intelligence-ip-to-deliver-actionable-insights-across-the-global-agricultural-sector): Asset purchase out of liquidation, November 2024. No Gro-branded API surface transferred.
+- API base URL as published: https://api.gro-intelligence.com/v2 (NXDOMAIN — not callable)
+
+## What survives
+
+- [GitHub organization](https://github.com/gro-intelligence): Still public.
+- [Official API client source](https://github.com/gro-intelligence/api-client): MIT licensed, Python + an unpublished R client. Last commit 2024-04-01.
+- [Python SDK on PyPI](https://pypi.org/project/groclient/): groclient 1.369.1, published 2024-01-31. Still installable; wraps a dead host.
+- [Python SDK on conda-forge](https://anaconda.org/conda-forge/groclient): 1.369.1.
+- [Documentation mirror](https://gro.readthedocs.io/): The surviving Sphinx build of the client reference. The canonical portal is gone.
+- [Release history](https://github.com/gro-intelligence/api-client/releases): Dated releases through v1.369.1 (2024-01-31).
+
+## The API surface, as it was
+
+Read-only. Every operation was an HTTP GET under /v2/, authenticated with `authorization: Bearer <token>`.
+
+- Ontology lookup: /v2/metrics, /v2/items, /v2/regions, /v2/frequencies, /v2/sources, /v2/units
+- Ontology discovery: /v2/entities/list, /v2/search, /v2/top/{entity_type}
+- Series discovery: /v2/data_series/list, /v2/stream/data_series/list
+- Availability: /v2/available/sources, /v2/available/time-frequencies
+- Units: /v2/units/allowed
+- Geography: /v2/geocentres
+- Data plane: /v2/data, /v2prime/data
+
+## Profile artifacts
+
+- [Authentication](authentication/gro-intelligence-authentication.yml): Bearer token, GROAPI_TOKEN.
+- [Rate limits](rate-limits/gro-intelligence-rate-limits.yml): Client-side throttle of 10 queries/second; no server-side limit or headers ever documented.
+- [Error catalog](errors/gro-intelligence-problem-types.yml): Derived from the client's status-code handling. Not RFC 9457.
+- [Conventions](conventions/gro-intelligence-conventions.yml): Read-only; idempotency, dry-run and reversibility all N/A.
+- [Data model](data-model/gro-intelligence-data-model.yml): Six ontology entities plus a composite-keyed series/point fact table.
+- [Lifecycle](lifecycle/gro-intelligence-lifecycle.yml): Retirement record and evidence.
+- [Changelog](changelog/gro-intelligence-changelog.yml): SDK release history through 2024-01-31.
+- [Packages](packages/gro-intelligence-packages.yml): Python, conda-forge, unpublished R client.
+- [CLI](cli/gro-intelligence-cli.yml): gro_client.
+- [Conformance](conformance/gro-intelligence-conformance.yml): No cross-cutting or domain standard adopted.
+- [Domain security](security/gro-intelligence-domain-security.yml): Parked domain with no SPF, DMARC, CAA or DNSSEC.
+- [Well-known probe](well-known/gro-intelligence-well-known.yml): No discovery document served; host is a catch-all.
+
+## What was never published
+
+No OpenAPI, Swagger, GraphQL SDL, AsyncAPI, WSDL or Protobuf definition was ever published by
+Gro Intelligence. No MCP server, no A2A agent card, no webhooks, no status page, no deprecation
+policy, no public pricing. The machine-readable record above is derived from the company's own
+client library, which is the closest thing to a contract that exists.

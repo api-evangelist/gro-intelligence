@@ -1,0 +1,41 @@
+generated: '2026-08-22'
+method: searched
+source: https://github.com/gro-intelligence/api-client/blob/development/groclient/cfg.py
+limit_count: 1
+status: retired
+note: >-
+  Gro Intelligence never published a rate-limit reference page, and the API host
+  no longer resolves so nothing can be observed live. What DOES exist is a
+  first-party client-side throttle compiled into the official SDK's config
+  module, which is a real published number and is recorded as exactly that — a
+  client-side ceiling, not a server-side contract. No response headers
+  (X-RateLimit-*, RateLimit-*, Retry-After) appear anywhere in the client's
+  request handling, so an agent had no runtime signal to read; the client
+  instead retried blind on any non-terminal status.
+rate_limits:
+- scope: per-client
+  enforcement: client-side throttle in the official SDK
+  window: 1s
+  limit: 10
+  burst: null
+  source: 'groclient/cfg.py: MAX_QUERIES_PER_SECOND = 10'
+  note: >-
+    Applied by the SDK's async/batch request queue. Whether the server enforced
+    a matching limit was never documented.
+response_headers: []
+response_headers_note: >-
+  None documented and none read by the client. lib.py's get_data() branches only
+  on status codes (200 success; 204/206 success-with-warning; 400/401/402/404
+  terminal, no retry; 301 handled as a series redirect; everything else
+  retried), and never inspects a rate-limit or Retry-After header.
+exhaustion:
+  status_code: null
+  note: >-
+    No 429 handling exists in the client. A 429 would have fallen into the
+    generic retry branch, which sleeps 2**retry_count seconds for up to
+    MAX_RETRIES = 4 attempts and then raises APIError.
+retry_policy:
+  max_retries: 4
+  backoff: 'exponential: sleep(2 ** retry_count), first failure retried immediately'
+  source: 'groclient/cfg.py: MAX_RETRIES = 4; groclient/lib.py: get_data()'
+  timeout_seconds: 6000

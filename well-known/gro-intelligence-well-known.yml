@@ -1,0 +1,34 @@
+generated: '2026-08-22'
+method: probed
+source: https://gro-intelligence.com/
+hit_count: 0
+note: >-
+  NO DOCUMENT WAS SERVED. gro-intelligence.com is a parked domain — it resolves
+  to GoDaddy nameservers (ns27/ns28.domaincontrol.com) and answers HTTP 200 to
+  EVERY path with the same 114-byte HTML lander redirect
+  (`window.location.href="/lander"`). The soft_404_control probe below returns
+  an identical body and byte count to every /.well-known/ path, which is the
+  proof this is a catch-all rather than a served discovery surface. No
+  WellKnown, SecurityTxt or AgentCard pointer is emitted from this file. The
+  API host api.gro-intelligence.com does not resolve at all (NXDOMAIN), so
+  there was no second host to probe.
+hosts:
+- host: https://gro-intelligence.com
+  documents:
+  - {path: /.well-known/security.txt, status: 200, file: null, verdict: catch-all-html}
+  - {path: /.well-known/openid-configuration, status: 200, file: null, verdict: catch-all-html}
+  - {path: /.well-known/oauth-authorization-server, status: 200, file: null, verdict: catch-all-html}
+  - {path: /.well-known/api-catalog, status: 200, file: null, verdict: catch-all-html}
+  - {path: /.well-known/ai-plugin.json, status: 200, file: null, verdict: catch-all-html}
+  - {path: /.well-known/agent-card.json, status: 200, file: null, verdict: catch-all-html}
+  - {path: /.well-known/agent.json, status: 200, file: null, verdict: catch-all-html}
+- host: https://api.gro-intelligence.com
+  documents:
+  - {path: /.well-known/security.txt, status: 0, file: null, verdict: dns-nxdomain}
+  - {path: /.well-known/agent-card.json, status: 0, file: null, verdict: dns-nxdomain}
+soft_404_control:
+  url: https://gro-intelligence.com/zzz-soft404-control
+  status: 200
+  bytes: 114
+  content_type: text/html
+  body: '<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href="/lander"}</script></head></html>'

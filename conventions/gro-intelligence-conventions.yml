@@ -1,0 +1,72 @@
+generated: '2026-08-22'
+method: derived
+source: https://github.com/gro-intelligence/api-client/blob/development/groclient/lib.py
+status: retired
+note: >-
+  Cross-cutting semantics derived from the first-party client library, the only
+  surviving published description of the API's behaviour. The Gro API was
+  READ-ONLY — every request in the client is an HTTP GET and there is no create,
+  update or delete surface anywhere in the library — which is why the write-side
+  dimensions below are `na` rather than absent.
+authentication:
+  style: bearer token in the `authorization` header
+  detail: authentication/gro-intelligence-authentication.yml
+http_methods: [GET]
+http_methods_note: >-
+  Verified across groclient/lib.py — every endpoint helper calls
+  requests.get(). No write verb appears in the library.
+idempotency:
+  supported: na
+  reason: read-only API — no write surface for an idempotency key to protect
+pagination:
+  style: none
+  detail: >-
+    No page/offset/cursor parameters appear in any endpoint helper. Result
+    volume was managed two other ways: a streaming endpoint
+    (/v2/stream/data_series/list, consumed in 4MB chunks — ITR_CHUNK_READ_SIZE)
+    and client-side fan-out (batch_async_get_data_points splits a selection into
+    parallel requests, bounded by MAX_QUERIES_PER_SECOND = 10 and
+    MAX_SERIES_PER_COMB = 1000).
+field_expansion:
+  supported: true
+  detail: >-
+    `show_revisions` and `show_available_date` toggles on data-point queries, and
+    a `series_description` block (V2_DATA_DESCRIPTION_PREFIX) that echoes the
+    six selection ids plus unit_id back onto each response.
+metadata:
+  supported: true
+  detail: >-
+    Ontology metadata is a first-class surface rather than a field on the
+    payload — /v2/{entity_type} lookup, /v2/entities/list, /v2/search,
+    /v2/units/allowed, /v2/available/sources, /v2/available/time-frequencies.
+request_tracing:
+  header: null
+  detail: >-
+    No request-id header is sent or read. The client does its own structured
+    logging instead, emitting route, params, elapsed_time_in_ms, retry_count and
+    status_code per attempt, plus a `tag: failed_gro_api_request` marker, and
+    appends SDK version info to every request's headers via get_version_info().
+versioning:
+  style: uri-path
+  current: v2
+  detail: lifecycle/gro-intelligence-lifecycle.yml
+error_envelope:
+  format: proprietary
+  problem_details: false
+  detail: errors/gro-intelligence-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  detail: rate-limits/gro-intelligence-rate-limits.yml
+dry_run_mode:
+  supported: na
+  reason: read-only API — nothing to rehearse
+reversibility:
+  state: na
+  reason: >-
+    Read-only API. Every operation is a GET against agricultural time-series and
+    ontology data; there is no write, no order, no payment and no delete, so
+    there is nothing an agent could take that would need taking back. No
+    reversal operation is claimed and no window is asserted, because none exists
+    to state.
+  write_surfaces: []
+  reversal_operations: []

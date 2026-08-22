@@ -1,0 +1,16 @@
+generated: '2026-08-22'
+method: probed
+source: https://gro-intelligence.com/
+plan_count: 0
+status: retired
+note: >-
+  No plans or pricing can be recorded. Gro Intelligence sold its platform
+  enterprise-first and never published a self-serve price list, and the question
+  is now moot: the company is defunct, gro-intelligence.com is a parked GoDaddy
+  lander that answers 200 to every path including /pricing, and the app host
+  that carried any commercial surface (app.gro-intelligence.com) does not
+  resolve. plan_count: 0 is a measured zero, not an unchecked field.
+plans: []
+evidence:
+- {url: 'https://gro-intelligence.com/pricing', status: 200, note: parked catch-all lander, 114 bytes — identical to the soft-404 control}
+- {url: 'https://app.gro-intelligence.com/', status: 0, note: DNS NXDOMAIN}

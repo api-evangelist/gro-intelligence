@@ -1,0 +1,58 @@
+generated: '2026-08-22'
+method: derived
+source: https://github.com/gro-intelligence/api-client/blob/development/groclient/lib.py
+status: retired
+note: >-
+  Derived from the first-party client library; there is no spec and no
+  surviving docs host to search for compliance claims. Recorded as a negative
+  inventory — the honest finding is that Gro conformed to no cross-cutting or
+  domain standard in a machine-checkable way, which is itself the measurement.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No oauth2 anywhere in the client — a single opaque bearer token, no
+    authorization or token endpoint.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration is not served (host is parked catch-all).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json media type appears in the client; errors are
+    read as opaque response.text.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt is not served (see well-known/gro-intelligence-well-known.yml).
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header is sent or read; the API was switched off without one.
+- id: rfc9110-idempotency
+  conforms: na
+  evidence: Read-only API — no write surface.
+- id: json-api
+  conforms: false
+  evidence: Proprietary response shape — a top-level `data` array of ontology-keyed rows.
+- id: odata
+  conforms: false
+  evidence: No $metadata surface; query is by ontology id, not OData filter syntax.
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI, Swagger, GraphQL SDL, AsyncAPI, WSDL or .proto was ever published (see x-coverage).
+domain_standards:
+- id: agricultural-market-information-system
+  conforms: false
+  evidence: >-
+    Gro's ontology (metric/item/region/frequency/source/unit with Gro-assigned
+    integer ids) is proprietary. It does not use AMIS, FAOSTAT, CPC, HS trade
+    codes or any published agricultural commodity code list as its identifier
+    scheme — a consumer needed a bespoke Gro connector and a Gro id mapping.
+    This is the reward-only domain_standard_conformance check finding no
+    standard to reward, not a penalty.
+- id: agrovoc
+  conforms: false
+  evidence: No AGROVOC / FAO concept URIs appear in the ontology surface.
+certifications: []
+certifications_note: >-
+  No trust center, compliance page or named certification survives. The company
+  is defunct and its domain is parked, so no Compliance pointer is emitted.

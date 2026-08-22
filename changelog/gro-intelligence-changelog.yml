@@ -1,0 +1,68 @@
+generated: '2026-08-22'
+method: searched
+source: https://github.com/gro-intelligence/api-client/releases
+status: frozen
+note: >-
+  Gro Intelligence published no API changelog page — the developer portal that
+  would have carried one (developers.gro-intelligence.com) no longer resolves.
+  What survives is the dated GitHub release history of the first-party client
+  library on the company's still-public organization, which is the only
+  published record of what changed and when. It is a CLIENT changelog and is
+  labelled as such: it tracks SDK releases, though several entries do announce
+  server-side API changes (the v2 area-weighting service, its metadata
+  addition). The history stops at 2024-01-31, four months before the company
+  ceased operations.
+scheme: semver-ish
+scheme_note: >-
+  Tags are v<major>.<minor>.<patch> with an unusually high, monotonically
+  advancing minor number driven by CI (poetry-dynamic-versioning from git).
+  Version numbers do not signal breaking change.
+current_version: 1.369.1
+current_version_date: '2024-01-31'
+final_entry: true
+final_entry_note: Last release ever published; the repository's last commit is 2024-04-01.
+entries:
+- version: 1.369.1
+  date: '2024-01-31'
+  breaking: false
+  highlights:
+  - Support multiple regions in the v2 area-weighting service (PR #390).
+- version: 1.362.0
+  date: '2024-01-09'
+  breaking: true
+  highlights:
+  - Removed get_access_token() from the SDK (PR #388).
+  - Removed --print_token from the gro_client CLI (PR #388).
+  - Removed get_access_token from sugar.py (PR #387).
+  note: >-
+    Removal of a public SDK function and a CLI flag without a major version
+    bump — the version scheme carried no breaking-change signal.
+- version: 1.361.1
+  date: '2024-01-05'
+  breaking: false
+  highlights:
+  - Added a client function for the v2 area-weighting service (PR #389).
+- version: 1.357.0
+  date: '2023-12-18'
+  breaking: false
+  highlights:
+  - PR #386 (no description published on the release).
+- version: 1.333.0
+  date: '2023-10-09'
+  breaking: false
+  highlights:
+  - 'Added a deprecation warning to get_access_token() (PR #385) — the deprecation later executed in 1.362.0.'
+  - Removed two documented methods of obtaining an access token (PR #384).
+- version: 1.302.0
+  date: '2023-07-24'
+  breaking: false
+  highlights:
+  - Added metadata to the area-weighting endpoint (PR #383).
+- version: 1.296.0
+  date: '2023-07-12'
+  breaking: false
+  highlights: []
+- version: 1.292.0
+  date: '2023-06-28'
+  breaking: false
+  highlights: []

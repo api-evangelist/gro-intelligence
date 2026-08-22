@@ -1,0 +1,67 @@
+generated: '2026-08-22'
+method: searched
+source: https://pypi.org/pypi/groclient/json
+note: >-
+  Gro Intelligence ceased operations in 2024 and its API host
+  (api.gro-intelligence.com) no longer resolves. The client libraries below are
+  still published and downloadable, but they wrap an API that is no longer
+  served. The publication dates are the abandonment evidence: the last release
+  of the official Python client is 2024-01-31, and the API it targets went dark
+  later that year.
+packages:
+- language: python
+  registry: pypi
+  name: groclient
+  url: https://pypi.org/project/groclient/
+  install: pip install groclient
+  official: true
+  version: 1.369.1
+  published: '2024-01-31'
+  license: MIT
+  repository: https://github.com/gro-intelligence/api-client
+  description: Python client library for accessing Gro Intelligence's agricultural data platform
+  status: abandoned
+  note: >-
+    Read from registry.pypi metadata (pypi.org/pypi/groclient/json) on 2026-08-22.
+    Latest release 1.369.1 published 2024-01-31; no release since. Package
+    homepage (gro-intelligence.com/platform/api) and documentation link
+    (developers.gro-intelligence.com) are both dead.
+- language: python
+  registry: conda-forge
+  name: groclient
+  url: https://anaconda.org/conda-forge/groclient
+  install: conda install -c conda-forge groclient
+  official: true
+  version: 1.369.1
+  published: null
+  status: abandoned
+  note: >-
+    Read from api.anaconda.org/package/conda-forge/groclient on 2026-08-22 —
+    latest_version 1.369.1, matching PyPI. The Anaconda API does not expose a
+    per-release upload date on this endpoint, so `published` is recorded null
+    (checked, nothing to record) rather than guessed. Feedstock is community-run
+    conda-forge packaging of the first-party source.
+- language: r
+  registry: none
+  name: gro-r-client
+  url: https://github.com/gro-intelligence/api-client/tree/development/r-client
+  install: null
+  official: true
+  version: null
+  published: null
+  status: abandoned
+  note: >-
+    An R client ships inside the first-party api-client repository
+    (`r-client/`, with its own README, Vagrantfile and src/). It was never
+    published to CRAN or any other registry, so there is no metadata endpoint
+    to query and no version to read — recorded null after checking, not omitted.
+registries_probed:
+- {registry: pypi, package: groclient, status: 200}
+- {registry: pypi, package: gro-client, status: 404}
+- {registry: npm, package: groclient, status: 404}
+- {registry: npm, package: gro-client, status: 404}
+- {registry: npm, package: gro-intelligence, status: 404}
+- {registry: npm, package: '@gro/client', status: 404}
+- {registry: conda-forge, package: groclient, status: 200}
+- {registry: cran, package: groclient, status: 404}
+- {registry: rubygems, package: groclient, status: 404}

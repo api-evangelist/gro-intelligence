@@ -1,0 +1,38 @@
+generated: '2026-08-22'
+method: searched
+source: https://github.com/gro-intelligence/api-client/blob/development/groclient/cli.py
+status: abandoned
+note: >-
+  First-party CLI shipped as a console entry point of the official `groclient`
+  Python package. Captured verbatim from the company's own MIT-licensed source
+  on its live GitHub organization. The CLI still installs, but every command
+  calls api.gro-intelligence.com, which no longer resolves — the command
+  surface is recorded as history, not as a usable tool.
+name: gro_client
+install:
+- pip install groclient
+- conda install -c conda-forge groclient
+package: packages/gro-intelligence-packages.yml
+authentication:
+  method: bearer-token
+  env_var: GROAPI_TOKEN
+  flag: --token
+  note: Defaults to the GROAPI_TOKEN environment variable; --token overrides it.
+commands:
+- name: gro_client
+  description: >-
+    Single-command CLI. Selects a data series by ontology name (item, metric,
+    region, partner_region), then prints the matching time-series points to
+    stdout or writes them to a CSV file. Results are chosen at random from
+    matching selections and are explicitly documented as non-deterministic —
+    the docstring directs anything more complex to the Python package.
+  flags:
+  - {flag: --item, description: Ontology item name (e.g. soybeans, sesame)}
+  - {flag: --metric, description: Ontology metric name (e.g. export, area harvested)}
+  - {flag: --region, description: Ontology region name (e.g. brazil, ethiopia)}
+  - {flag: --partner_region, description: Counterparty region for trade series}
+  - {flag: --file, description: Write the series to this CSV file instead of stdout}
+  - {flag: --token, description: API authentication token (defaults to $GROAPI_TOKEN)}
+examples:
+- gro_client --item=soybeans --region=brazil --partner_region china --metric export
+- gro_client --item=sesame --region=ethiopia

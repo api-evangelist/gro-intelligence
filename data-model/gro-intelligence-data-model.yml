@@ -1,0 +1,71 @@
+generated: '2026-08-22'
+method: derived
+source: https://github.com/gro-intelligence/api-client/blob/development/groclient/constants.py
+status: retired
+note: >-
+  No OpenAPI exists, so this graph is derived from the ontology constants and
+  entity helpers in the first-party client library rather than from schema
+  $refs. Gro's data model was unusually clean: six ontology entities, and one
+  fact table addressed by a composite key made of their ids. Nothing here is
+  inferred beyond what constants.py and lib.py name explicitly.
+entities:
+- name: metric
+  plural: metrics
+  id_field: metric_id
+  endpoint: /v2/metrics
+  description: What is being measured (area harvested, production, export, price).
+- name: item
+  plural: items
+  id_field: item_id
+  endpoint: /v2/items
+  description: The commodity or product being measured (soybeans, wheat, sesame).
+- name: region
+  plural: regions
+  id_field: region_id
+  endpoint: /v2/regions
+  description: >-
+    Geography, hierarchical across nine levels — world(1), continent(2),
+    country(3), province(4), district(5), city(6), market(7), other(8),
+    coordinate(9). Carries geometry via /v2/geocentres and the geojson helpers.
+- name: frequency
+  plural: frequencies
+  id_field: frequency_id
+  endpoint: /v2/frequencies
+  description: Reporting cadence of a series (daily, weekly, monthly, annual).
+- name: source
+  plural: sources
+  id_field: source_id
+  endpoint: /v2/sources
+  description: The publisher the series was ingested from (USDA, national statistics agencies, satellite products).
+- name: unit
+  plural: units
+  id_field: unit_id
+  endpoint: /v2/units
+  description: >-
+    Unit of measure, with allowed-unit and conversion surfaces
+    (/v2/units/allowed, client-side convert_unit).
+- name: data_series
+  id_field: null
+  endpoint: /v2/data_series/list
+  description: >-
+    A selection of the six ontology ids that together identify one time series.
+    Composite key: metric_id + item_id + region_id + partner_region_id +
+    frequency_id + source_id.
+- name: data_point
+  id_field: null
+  endpoint: /v2/data
+  description: >-
+    One observation on a data_series. Uniquely keyed by the data_series
+    composite plus reporting_date, start_date and end_date, and carrying value
+    and unit_id.
+relationships:
+- {from: data_series, to: metric, type: belongs_to, via: metric_id}
+- {from: data_series, to: item, type: belongs_to, via: item_id}
+- {from: data_series, to: region, type: belongs_to, via: region_id}
+- {from: data_series, to: region, type: belongs_to, via: partner_region_id, note: counterparty geography on trade series}
+- {from: data_series, to: frequency, type: belongs_to, via: frequency_id}
+- {from: data_series, to: source, type: belongs_to, via: source_id}
+- {from: data_series, to: data_point, type: has_many, via: composite selection}
+- {from: data_point, to: unit, type: belongs_to, via: unit_id}
+- {from: region, to: region, type: has_many, via: descendant/ancestor traversal (lookup_belongs, get_descendant_regions)}
+- {from: metric, to: unit, type: has_many, via: /v2/units/allowed (metric_id + item_id -> allowed units)}

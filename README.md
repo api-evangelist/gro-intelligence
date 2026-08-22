@@ -64,5 +64,21 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Gro Intelligence is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/gro-intelligence_stock/
+**Status: defunct.** Gro Intelligence was a New York- and Nairobi-based agricultural and climate
+data company, founded in 2014 by Sara Menker, that operated a read-only REST API over a normalized
+ontology of agricultural, climate and trade time series. The company ran out of money, laid off 60%
+of its staff in March 2024 and ceased operations that spring; Almanac (formerly Semios) acquired its
+IP and AI models out of liquidation in November 2024.
+
+The API host `api.gro-intelligence.com`, the developer portal `developers.gro-intelligence.com` and
+the web application `app.gro-intelligence.com` all return NXDOMAIN, and `gro-intelligence.com` is a
+parked registrar lander that answers HTTP 200 to every path. **There is no callable endpoint.** This
+profile is a historical record assembled from the surfaces that survive:
+
+- https://github.com/gro-intelligence — the company's still-public GitHub organization
+- https://github.com/gro-intelligence/api-client — the first-party MIT-licensed client library
+- https://pypi.org/project/groclient/ — `groclient` 1.369.1, last published 2024-01-31
+- https://gro.readthedocs.io/ — the surviving documentation mirror
+
+Gro Intelligence never published an OpenAPI, GraphQL SDL, AsyncAPI, WSDL or Protobuf definition, an
+MCP server, or an A2A agent card. See `apis.yml` `x-coverage` for the probe evidence.

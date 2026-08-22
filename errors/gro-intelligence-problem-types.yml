@@ -1,0 +1,63 @@
+generated: '2026-08-22'
+method: derived
+source: https://github.com/gro-intelligence/api-client/blob/development/groclient/lib.py
+format: proprietary
+status: retired
+note: >-
+  There is no OpenAPI to derive 4xx/5xx responses from and no published error
+  reference (developers.gro-intelligence.com is dead). This catalog is derived
+  from the status-code branching in the first-party client's request handler,
+  `get_data()` in groclient/lib.py, which is the only surviving published
+  statement of how the Gro API signalled failure. It is NOT RFC 9457: the
+  client reads `response.text` opaquely and no application/problem+json media
+  type appears anywhere in the library. Titles below describe the client's
+  documented BEHAVIOUR for each status, not provider-published error titles,
+  and none are invented.
+envelope:
+  media_type: application/json
+  problem_details: false
+  note: >-
+    Successful responses carry a top-level `data` array (the 301 redirect
+    handler reads `response.json()["data"][0]`). No structured error envelope is
+    documented; failures surface through the client's own APIError exception,
+    which wraps the raw response, the retry count, the URL and the params.
+exception:
+  name: APIError
+  raised_when: retries exhausted or a terminal status was returned
+  carries: [response, retry_count, url, params]
+problems:
+- status: 200
+  title: OK
+  behavior: returned to caller
+- status: 204
+  title: No Content
+  behavior: returned to caller with a logged warning — success with a caveat
+- status: 206
+  title: Partial Content
+  behavior: returned to caller with a logged warning — success with a caveat
+- status: 301
+  title: Series redirect
+  behavior: >-
+    Not an HTTP redirect follow. The client re-maps the request params from
+    `response.json()["data"][0]` and retries — the API used 301 to tell a caller
+    that an ontology entity had been migrated to a new id.
+- status: 400
+  title: Bad Request
+  behavior: terminal — not retried, raises APIError
+- status: 401
+  title: Unauthorized
+  behavior: terminal — not retried, raises APIError
+- status: 402
+  title: Payment Required
+  behavior: >-
+    terminal — not retried, raises APIError. A rare status in the wild; Gro used
+    it as an entitlement signal for data a subscription did not cover.
+- status: 404
+  title: Not Found
+  behavior: terminal — not retried, raises APIError
+- status: null
+  title: Transport failure or unhandled status
+  behavior: >-
+    Any other status (including 429 and 5xx) and any raised transport exception
+    fall through to the retry branch — up to MAX_RETRIES = 4 attempts with
+    2**retry_count backoff — then APIError.

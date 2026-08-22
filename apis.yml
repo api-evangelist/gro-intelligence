@@ -1,23 +1,154 @@
 aid: gro-intelligence
 name: Gro Intelligence
-description: 'Gro Intelligence is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Gro Intelligence was a New York- and Nairobi-based agricultural and climate
+  data company, founded in 2014 by Sara Menker, that built a global
+  food-and-climate intelligence platform on top of satellite imagery, weather
+  models, government statistics and trade data. Its product was a normalized
+  ontology — metrics, items, regions, frequencies, sources and units — over
+  hundreds of trillions of data points, exposed through a read-only REST API and
+  an official Python client used by traders, insurers, lenders and CPG
+  procurement teams to forecast yield, price and climate risk. The company
+  raised an $85M Series B in 2021 and was named to TIME's 100 most influential
+  companies, then ran out of money, laid off 60% of staff in March 2024 and
+  ceased operations that spring; Almanac (formerly Semios) acquired its IP and
+  AI models out of liquidation in November 2024. This profile is a historical
+  record: the API host, developer portal and web application no longer resolve,
+  and the primary domain is a parked registrar lander.
 url: https://raw.githubusercontent.com/api-evangelist/gro-intelligence/refs/heads/main/apis.yml
+image: https://avatars.githubusercontent.com/u/15130228?v=4
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pass-completed
+x-status: defunct
 specificationVersion: '0.20'
 created: '2026-08-22'
 modified: '2026-08-22'
 tags:
 - Company
-apis: []
+- Agriculture
+- Climate
+- Data
+- Analytics
+- Satellite Imagery
+- Commodities
+- Weather
+- Food Security
+- Time Series
+- Defunct
+apis:
+- name: Gro Intelligence API (retired)
+  description: >-
+    Read-only REST API over the Gro ontology and its agricultural, climate and
+    trade time series. Every operation was an HTTP GET under /v2/, authenticated
+    with a bearer token issued from the Gro web application: ontology lookup and
+    search (/v2/metrics, /v2/items, /v2/regions, /v2/frequencies, /v2/sources,
+    /v2/units, /v2/entities/list, /v2/search), series discovery
+    (/v2/data_series/list, /v2/stream/data_series/list, /v2/available/sources,
+    /v2/available/time-frequencies, /v2/top/{entity_type}), unit handling
+    (/v2/units/allowed), geography (/v2/geocentres) and the data plane
+    (/v2/data, /v2prime/data). The service is RETIRED — api.gro-intelligence.com
+    no longer resolves and no credential can be obtained. Recorded here from the
+    company's own published client library, not from a live probe.
+  humanURL: https://github.com/gro-intelligence/api-client
+  baseURL: https://api.gro-intelligence.com/v2
+  image: https://avatars.githubusercontent.com/u/15130228?v=4
+  tags:
+  - Agriculture
+  - Climate
+  - Time Series
+  - Data
+  x-status: retired
+  x-retired-note: >-
+    baseURL is recorded as the company published it in groclient/cfg.py
+    (API_HOST = "api.gro-intelligence.com"). The host returns NXDOMAIN as of
+    2026-08-22. It is kept for the historical record and is explicitly not a
+    claim that the endpoint is callable.
+  properties:
+  - type: Authentication
+    url: authentication/gro-intelligence-authentication.yml
+  - type: RateLimits
+    url: rate-limits/gro-intelligence-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/gro-intelligence-problem-types.yml
+  - type: Conventions
+    url: conventions/gro-intelligence-conventions.yml
+  - type: DataModel
+    url: data-model/gro-intelligence-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/gro-intelligence-lifecycle.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
-- type: Website
-  url: https://forgeglobal.com/gro-intelligence_stock/
+- type: Documentation
+  url: https://gro.readthedocs.io/
+- type: GitHubOrganization
+  url: https://github.com/gro-intelligence
+- type: Packages
+  url: packages/gro-intelligence-packages.yml
+- type: SDKs
+  url: packages/gro-intelligence-packages.yml
+- type: CLI
+  url: cli/gro-intelligence-cli.yml
+- type: Authentication
+  url: authentication/gro-intelligence-authentication.yml
+- type: RateLimits
+  url: rate-limits/gro-intelligence-rate-limits.yml
+- type: Plans
+  url: plans/gro-intelligence-plans-pricing.yml
+- type: ErrorCatalog
+  url: errors/gro-intelligence-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/gro-intelligence-lifecycle.yml
+- type: Conventions
+  url: conventions/gro-intelligence-conventions.yml
+- type: Conformance
+  url: conformance/gro-intelligence-conformance.yml
+- type: DataModel
+  url: data-model/gro-intelligence-data-model.yml
+- type: ChangeLog
+  url: changelog/gro-intelligence-changelog.yml
+- type: DomainSecurity
+  url: security/gro-intelligence-domain-security.yml
+- type: LLMsTxt
+  url: llms/gro-intelligence-llms.txt
+x-enrichment:
+  date: '2026-08-22'
+  status: minimal
+  artifacts_added: 14
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: defunct
+  detail: >-
+    Gro Intelligence ceased operations in spring 2024 and was liquidated (IP acquired
+    by Almanac, November 2024); its API host api.gro-intelligence.com, developer
+    portal developers.gro-intelligence.com and app host app.gro-intelligence.com all
+    return NXDOMAIN, and gro-intelligence.com is now a parked GoDaddy lander that
+    answers HTTP 200 with the same 114-byte redirect body for every path including
+    /openapi.json and /.well-known/agent-card.json. STEP 0b contract discovery was
+    still run in full; the profile is built from the surfaces that survive — the
+    company's public GitHub organization, the first-party MIT-licensed groclient
+    library, its dated GitHub releases, and the PyPI/conda-forge listings. No
+    OpenAPI, GraphQL SDL, MCP server or A2A agent card was ever published by this
+    company.
+  evidence:
+  - url: https://api.gro-intelligence.com/openapi.json
+    status: 0
+  - url: https://developers.gro-intelligence.com/
+    status: 0
+  - url: https://gro-intelligence.com/openapi.json
+    status: 200
+  - url: https://gro-intelligence.com/zzz-soft404-control
+    status: 200
+  - url: https://gro-intelligence.com/.well-known/agent-card.json
+    status: 200
+  - url: https://github.com/gro-intelligence/api-client
+    status: 200
+  - url: https://pypi.org/project/groclient/
+    status: 200
+  checked: '2026-08-22'
