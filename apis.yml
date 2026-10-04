@@ -47,6 +47,9 @@ x-status: defunct
 specificationVersion: '0.20'
 created: '2026-08-22'
 modified: '2026-09-16'
+x-docs-platform: sphinx
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 tags:
 - Company
 - Agriculture
