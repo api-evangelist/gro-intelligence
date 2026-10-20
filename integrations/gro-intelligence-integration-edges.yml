@@ -1,3 +1,31 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://registry.npmjs.org
+- https://pypi.org/pypi
+- https://rubygems.org/api/v1
+- https://crates.io/api/v1
+- https://repo1.maven.org/maven2
+- https://api.nuget.org/v3
+- https://proxy.golang.org
+- https://zapier.com/apps/gro-intelligence/integrations
+- https://n8n.io/integrations/gro-intelligence/
+- https://composio.dev/toolkits/gro-intelligence
+- https://monid.ai/tools/gro-intelligence
+checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
+- https://composio.dev/toolkits/gro-intelligence
+- https://monid.ai/tools/gro-intelligence
+- https://n8n.io/integrations/gro-intelligence/
+- https://zapier.com/apps/gro-intelligence/integrations
+summary: null
+marketplace_apps: []
 edges:
 - partner_name: PyPI
   partner: pypi
@@ -29,21 +57,4 @@ edges:
     detected: '2026-10-18'
   detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
-generated: '2026-10-18'
-method: searched
-source:
-- https://api.nuget.org/v3
-- https://crates.io/api/v1
-- https://proxy.golang.org
-- https://pypi.org/pypi
-- https://registry.npmjs.org
-- https://repo1.maven.org/maven2
-- https://rubygems.org/api/v1
-checked:
-- https://api.nuget.org/v3
-- https://crates.io/api/v1
-- https://proxy.golang.org
-- https://pypi.org/pypi
-- https://registry.npmjs.org
-- https://repo1.maven.org/maven2
-- https://rubygems.org/api/v1
+templates: []

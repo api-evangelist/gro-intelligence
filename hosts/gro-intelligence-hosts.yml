@@ -1,0 +1,63 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 4
+  own: 2
+  other_domain: 0
+  platform: 2
+  roles:
+  - api
+  - docs
+  - source
+  - website
+hosts:
+- host: api.gro-intelligence.com
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: gro-intelligence.com
+  role: api
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - GitHubOrganization
+  serves:
+  - docs
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: gro-intelligence.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Website
+  serves: []
+  registrable_domain: gro-intelligence.com
+  role: website
+  relation: own
+- host: gro.readthedocs.io
+  found_by:
+  - pointer
+  - vendor-detect
+  types:
+  - Documentation
+  serves:
+  - cdn
+  - documentation
+  vendor: cloudflare
+  registrable_domain: readthedocs.io
+  role: docs
+  relation: platform
