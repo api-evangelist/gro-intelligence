@@ -64,21 +64,63 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-**Status: defunct.** Gro Intelligence was a New York- and Nairobi-based agricultural and climate
-data company, founded in 2014 by Sara Menker, that operated a read-only REST API over a normalized
-ontology of agricultural, climate and trade time series. The company ran out of money, laid off 60%
-of its staff in March 2024 and ceased operations that spring; Almanac (formerly Semios) acquired its
-IP and AI models out of liquidation in November 2024.
+> **No longer operating.** This company or product has shut down, been discontinued, or been deprecated. This profile is kept as a historical record and is not maintained or rated.
 
-The API host `api.gro-intelligence.com`, the developer portal `developers.gro-intelligence.com` and
-the web application `app.gro-intelligence.com` all return NXDOMAIN, and `gro-intelligence.com` is a
-parked registrar lander that answers HTTP 200 to every path. **There is no callable endpoint.** This
-profile is a historical record assembled from the surfaces that survive:
+Gro Intelligence was a New York- and Nairobi-based agricultural and climate data company, founded in 2014 by Sara Menker, that built a global food-and-climate intelligence platform on top of satellite imagery, weather models, government statistics and trade data. Its product was a normalized ontology — metrics, items, regions, frequencies, sources and units — over hundreds of trillions of data points, exposed through a read-only REST API and an official Python client used by traders, insurers, lenders and CPG procurement teams to forecast yield, price and climate risk. The company raised an $85M Series B in 2021 and was named to TIME's 100 most influential companies, then ran out of money, laid off 60% of staff in March 2024 and ceased operations that spring; Almanac (formerly Semios) acquired its IP and AI models out of liquidation in November 2024. This profile is a historical record: the API host, developer portal and web application no longer resolve, and the primary domain is a parked registrar lander.
 
-- https://github.com/gro-intelligence — the company's still-public GitHub organization
-- https://github.com/gro-intelligence/api-client — the first-party MIT-licensed client library
-- https://pypi.org/project/groclient/ — `groclient` 1.369.1, last published 2024-01-31
-- https://gro.readthedocs.io/ — the surviving documentation mirror
+**Areas:** Company · Agriculture · Climate · Data · Analytics · Satellite Imagery · Commodities · Weather · Food Security · Time Series · Defunct
 
-Gro Intelligence never published an OpenAPI, GraphQL SDL, AsyncAPI, WSDL or Protobuf definition, an
-MCP server, or an A2A agent card. See `apis.yml` `x-coverage` for the probe evidence.
+## Gro Intelligence on APIs.io (historical record)
+
+Everything profiled for Gro Intelligence is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/gro-intelligence/](https://apis.io/providers/gro-intelligence/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Gro Intelligence API (retired)](https://apis.io/apis/gro-intelligence/gro-intelligence-api-retired/) — Read-only REST API over the Gro ontology and its agricultural, climate and trade time series. Every operation was an HTTP GET under /v2/, authenticated with…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Gro Intelligence Authentication](https://apis.io/security/gro-intelligence/gro-intelligence-authentication/)
+- [Gro Intelligence Domain Security](https://apis.io/security/gro-intelligence/gro-intelligence-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Gro Intelligence Plans Pricing](https://apis.io/plans/gro-intelligence/gro-intelligence-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Gro Intelligence Rate Limits](https://apis.io/rate-limits/gro-intelligence/gro-intelligence-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://gro-intelligence.com)
+- [Documentation](https://gro.readthedocs.io/)
+- [GitHub](https://github.com/gro-intelligence)
+
+## API Evangelist rating
+
+**Not rated** — this company is recorded as no longer operating, so no score is published. If it is in fact operating, say so on this repository and it will be re-profiled.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Gro Intelligence: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/gro-intelligence/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
